@@ -1,3 +1,5 @@
+import { fromJS } from 'immutable';
+
 const defer = function() {
     let result = {};
     result.promise = new Promise(function(resolve, reject) {
@@ -17,9 +19,9 @@ const applyWorker = (worker) => {
 		// New reducer for workified store
 		let replacementReducer = (state, action) => {
 			if (action.state) {
-				return action.state;
+				return fromJS(action.state);
 			}
-			return state;
+			return fromJS(state);
 		}
 
 		// Start task id;
@@ -52,11 +54,11 @@ const applyWorker = (worker) => {
 				taskId++;
 				worker.postMessage(task);
 				return deferred.promise;
-			} 
+			}
 		}
 
 		store.isWorker = true;
-		
+
 		// Add worker events listener
 		worker.addEventListener('message', function(e) {
 			let action = e.data;
