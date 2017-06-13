@@ -40,7 +40,7 @@ const applyWorker = (worker) => {
 				if (window.disableWebWorker) {
 					return next({
 						type: action.type,
-						state: reducer(store.getState(), action)
+						state: reducer(fromJS(store.getState()), action)
 					});
 				}
 				worker.postMessage(action);

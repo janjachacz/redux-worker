@@ -228,7 +228,7 @@ return /******/ (function(modules) { // webpackBootstrap
 						if (window.disableWebWorker) {
 							return next({
 								type: action.type,
-								state: reducer(store.getState(), action)
+								state: reducer((0, _immutable.fromJS)(store.getState()), action)
 							});
 						}
 						worker.postMessage(action);
